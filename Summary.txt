@@ -45,13 +45,13 @@ sqoop import \
 
 In the above method, the Sqoop job gets executed faster but the resulting file size is very large : 506 MB
 
-Note: Sqoop only creates a directory with same name as table if no target-dir is specified, or the target-dir lies in /user/hadoop
+Note: Sqoop only creates a directory with same name as table if no target-dir is specified, or the target-dir lies in /user/hadoop/
 Otherwise, it directly writes in the specified target-dir.
 
 
 
 
-# Saving as parquet files to optimize performance :
+# Optional:  Saving as parquet files to optimize performance :
 
 sqoop import \
 --connect jdbc:mysql://upgraddetest.cyaielc9bmnf.us-east-1.rds.amazonaws.com/testdatabase \
@@ -68,8 +68,8 @@ It creates a directory .metadata to store the schema information.
 Parquet files are typically compressed more effectively than CSV files, which results in reduced storage costs and faster I/O.
 The parquet file that was written was only of size 42.6 MB, which is significantly less than normal text files.
 
-But, in this method, it is difficult to set custom schema, so I used the text file for spark transformation code.
-
+But, in this method, it is not possible to set custom schema (as per Spark 2.4), so I used the text file for spark transformation code.
+Here, you will have to cast the different columns to specific data types. 
 
 
 Check if the data is imported correctly : 
