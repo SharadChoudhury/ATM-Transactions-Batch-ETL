@@ -18,6 +18,7 @@ transformations using Spark, So we have to create an EMR cluster with following 
 	Hue
 	Jupyter Notebook
 	Livy
+	Zeppelin
 
 
 Then, in the EMR instance, setup Sqoop to connect to RDS : 
@@ -41,6 +42,7 @@ sqoop import \
 --username student --password STUDENT123 \
 --target-dir /user/livy/data \
 --fields-terminated-by '|' \
+--lines-terminated-by '\n' \
 -m 1
 
 In the above method, the Sqoop job gets executed faster but the resulting file size is very large : 506 MB
@@ -49,39 +51,44 @@ Note: Sqoop only creates a directory with same name as table if no target-dir is
 Otherwise, it directly writes in the specified target-dir.
 
 
-
-
 # Optional:  Saving as parquet files to optimize performance :
 
 sqoop import \
 --connect jdbc:mysql://upgraddetest.cyaielc9bmnf.us-east-1.rds.amazonaws.com/testdatabase \
 --table SRC_ATM_TRANS \
 --username student --password STUDENT123 \
+--null-string '\\N' --null-non-string '\\N' \
 --target-dir /user/livy/ \
 --fields-terminated-by '|' \
 -m 1 \
 --as-parquetfile
 
-While writing as parquet file, the sqoop job takes a little more time but it is more suited big data workloads, because : 
-Parquet files store schema information, making it easier to handle schema evolution in Spark. 
-It creates a directory .metadata to store the schema information.
-Parquet files are typically compressed more effectively than CSV files, which results in reduced storage costs and faster I/O.
+- While writing as parquet file, the sqoop job takes a little more time but it is more suited big data workloads, because : 
+- Parquet files store schema information, making it easier to handle schema evolution in Spark. 
+- It creates a directory .metadata to store the schema information.
+- Parquet files are typically compressed more effectively than CSV files, which results in reduced storage costs and faster I/O.
 The parquet file that was written was only of size 42.6 MB, which is significantly less than normal text files.
 
 But, in this method, it is not possible to set custom schema (as per Spark 2.4), so I used the text file for spark transformation code.
-Here, you will have to cast the different columns to specific data types. 
+First read the parquet file with inferSchema=true, then cast the columns to appropriate data types as required.
 
 
 Check if the data is imported correctly : 
 hadoop fs -ls /user/livy/data
 
-Rename the file:
-hdfs dfs -mv /user/livy/data/part-m* /user/livy/ATM.csv
+
+
 
 # Spark task
 Run the SparkETLCode.ipynb notebook in Jupyter to create the fact and dimensions and store them into separate
 files in S3.
 
 
-# Redshift task
 
+# Redshift task
+Create a redshift cluster with two nodes of dc2.large instances.
+Create the schema and tables. Then load data into these tables from s3 bucket. 
+Follow the commands in model_creation.sql
+(S3 objects URI and region can be noted from their properties tab)
+
+Now analyse the data using the queries from analysis.sql
