@@ -71,19 +71,19 @@ create table atm_model.fact_atm_trans(
 
 -- First load data in dim_location, then in dim_atm table
 copy atm_model.dim_location from
-'s3 uri'
+'s3://atm-data-model/DIM_LOCATION/part-00000-f0b34689-afbe-47a3-9bf3-a3999784dc11-c000.csv'
 iam_role 'arn:aws:iam::391707279775:role/myRedshiftRole'
 delimiter ',' region 'us-east-1'
 ignoreheader 1;
 
 copy atm_model.dim_atm from
-'s3 uri'
+'s3://atm-data-model/DIM_ATM/part-00000-75334a09-7af5-4a4f-8c06-840d9d29dc71-c000.csv'
 iam_role 'arn:aws:iam::391707279775:role/myRedshiftRole'
 delimiter ',' region 'us-east-1'
 ignoreheader 1;
 
 copy atm_model.dim_date from
-'s3 uri'
+'s3://atm-data-model/DIM_DATE/part-00000-fa8da1dd-3b30-4ec2-abe6-0bcff634d411-c000.csv'
 iam_role 'arn:aws:iam::391707279775:role/myRedshiftRole'
 delimiter ',' region 'us-east-1'
 TIMEFORMAT 'auto'
@@ -94,13 +94,13 @@ ignoreheader 1;
 
 
 copy atm_model.dim_card_type from
-'s3 uri'
+'s3://atm-data-model/DIM_CARD_TYPE/part-00000-6fea4a14-25e7-470d-a105-6bf1835fb4aa-c000.csv'
 iam_role 'arn:aws:iam::391707279775:role/myRedshiftRole'
 delimiter ',' region 'us-east-1'
 ignoreheader 1;
 
 copy atm_model.fact_atm_trans from
-'s3 uri'
+'s3://atm-data-model/FACT_ATM_TRANS/part-00000-dc01a03a-b4a7-4fdf-a091-32e2250f3f1b-c000.csv'
 iam_role 'arn:aws:iam::391707279775:role/myRedshiftRole'
 delimiter ',' region 'us-east-1'
 ignoreheader 1;
