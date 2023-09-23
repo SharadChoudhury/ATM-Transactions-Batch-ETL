@@ -9,8 +9,8 @@ Batch ETL pipeline using Apache Sqoop, Apache PySpark, Amazon S3 and Amazon RedS
 We have the ATM Transaction data hosted on a RDS instance within table SRC_ATM_TRANS in testdatabase.
 
 - **RDS Connection String**: <your_rds_connection_string>
-- **Username**: <username>
-- **Password**: <password>
+- **Username**: username
+- **Password**: password
 - **Database**: testdatabase
 - **Table Name**: SRC_TRANS
 
@@ -26,6 +26,8 @@ We have to ingest the data from RDS into HDFS in our EMR cluster and perform tra
 - Jupyter Notebook
 - Livy
 - Zeppelin
+
+Note that I am using Spark 2.4 for this project.
 
 ## Configure Sqoop in EMR Instance
 
@@ -91,5 +93,5 @@ Since the tables have parent-child relationships between them, it is important t
 
 To delete a table with dependencies you can also use:
 ```sql
-drop table <table-name> cascade
+drop table <table-name> cascade;
 ```
