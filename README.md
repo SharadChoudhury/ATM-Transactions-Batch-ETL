@@ -74,7 +74,7 @@ hadoop fs -ls /user/livy/data
 Run the `SparkETLCode.ipynb` notebook in Jupyter to create the fact and dimensions and store them into separate folders in S3.
 
 ## Data Model
-<img width="679" alt="image" src="https://github.com/SharadChoudhury/ATM-Refill-Batch-ETL/assets/65325622/45d27026-94e4-438e-a5bf-776efcb7123a">
+<img width="1252" alt="Screenshot 2023-09-23 at 12 23 29" src="https://github.com/SharadChoudhury/ATM-Refill-Batch-ETL/assets/65325622/8a8adce1-ade4-4bee-92d8-55375e698387">
 
 
 ## Data Warehousing with Redshift 
