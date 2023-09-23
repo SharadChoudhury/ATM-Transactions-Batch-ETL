@@ -29,16 +29,13 @@ We have to ingest the data from RDS into HDFS in our EMR cluster and perform tra
 
 ## Configure Sqoop in EMR Instance
 
-To set up Sqoop to connect to RDS in the EMR instance, follow these steps:
+To set up Sqoop to connect to RDS in the EMR instance, follow these steps (As Root user):
 
 ```bash
-sudo -i 
-
 wget https://de-mysql-connector.s3.amazonaws.com/mysql-connector-java-8.0.25.tar.gz
 tar -xvf mysql-connector-java-8.0.25.tar.gz
 cd mysql-connector-java-8.0.25/
 sudo cp mysql-connector-java-8.0.25.jar /usr/lib/sqoop/lib/
-exit 
 ```
 
 ## Import Data into HDFS using Sqoop
@@ -64,7 +61,6 @@ sqoop import \
 ## Check Data Import
 
 To check if the data is imported correctly, run the following command:
-
 ```bash
 hadoop fs -ls /user/livy/data
 ```
@@ -80,3 +76,20 @@ Run the `SparkETLCode.ipynb` notebook in Jupyter to create the fact and dimensio
 - Create the schema and tables. Then load data into these tables from an S3 bucket. 
 - Follow the commands in `model_creation.sql` (S3 objects URI and region can be noted from their properties tab).
 - Now analyze the data using the queries from `analysis.sql`.
+Feel free to analyze more on the data to derive insights.
+
+
+Parent-child relationships between tables as per our Data Model:
+Parent table: When foreign key of a table references some attribute of this table
+Child table : The table that contains the foreign key referencing the parent table
+- Note that [Uniqueness, primary key, and foreign key constraints are informational only; they are not enforced by Amazon Redshift when you populate a table. For example, if you insert data into a table with dependencies, the insert can succeed even if it violates the constraint. Nonetheless, primary keys and foreign keys are used as planning hints and they should be declared if your ETL process or some other process in your application enforces their integrity.](https://docs.aws.amazon.com/redshift/latest/dg/t_Defining_constraints.html#:~:text=Uniqueness%2C%20primary%20key,enforces%20their%20integrity.)
+
+
+Since the tables have parent-child relationships between them, it is important to remember that:
+- We should first upload data to parent table then into child table.
+- We should first delete the child table, then the parent table.
+
+To delete a table with dependencies you can also use:
+```sql
+drop table <table-name> cascade
+```
