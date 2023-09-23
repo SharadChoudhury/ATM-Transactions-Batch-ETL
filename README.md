@@ -86,10 +86,11 @@ Run the `SparkETLCode.ipynb` notebook in Jupyter to create the fact and dimensio
 Feel free to analyze more on the data to derive insights.
 
 
-Parent-child relationships between tables as per our Data Model:
-Parent table: When foreign key of a table references some attribute of this table
-Child table : The table that contains the foreign key referencing the parent table
-- Note that [Uniqueness, primary key, and foreign key constraints are informational only; they are not enforced by Amazon Redshift when you populate a table. For example, if you insert data into a table with dependencies, the insert can succeed even if it violates the constraint. Nonetheless, primary keys and foreign keys are used as planning hints and they should be declared if your ETL process or some other process in your application enforces their integrity.](https://docs.aws.amazon.com/redshift/latest/dg/t_Defining_constraints.html#:~:text=Uniqueness%2C%20primary%20key,enforces%20their%20integrity.)
+### Parent-child relationships between tables as per our Data Model:
+- Parent table: When foreign key of a table references some attribute of this table
+- Child table : The table that contains the foreign key referencing the parent table
+
+Note that [Uniqueness, primary key, and foreign key constraints are informational only; they are not enforced by Amazon Redshift when you populate a table. For example, if you insert data into a table with dependencies, the insert can succeed even if it violates the constraint. Nonetheless, primary keys and foreign keys are used as planning hints and they should be declared if your ETL process or some other process in your application enforces their integrity.](https://docs.aws.amazon.com/redshift/latest/dg/t_Defining_constraints.html#:~:text=Uniqueness%2C%20primary%20key,enforces%20their%20integrity.)
 
 
 Since the tables have parent-child relationships between them, it is important to remember that:
