@@ -3,6 +3,8 @@ Batch ETL pipeline using Apache Sqoop, Apache PySpark, Amazon S3 and Amazon RedS
 
 
 # Project Outline
+<img width="1146" alt="Screenshot 2023-09-23 at 11 50 15" src="https://github.com/SharadChoudhury/ATM-Refill-Batch-ETL/assets/65325622/0b4af350-0947-4006-bf97-fbe01e3f9bc6">
+
 
 ## RDS Connection Details
 
@@ -60,19 +62,22 @@ sqoop import \
 - Otherwise, it directly writes in the specified target-dir.
 
 
-## Check Data Import
+## Check Data Import in HDFS
 
 To check if the data is imported correctly, run the following command:
 ```bash
 hadoop fs -ls /user/livy/data
 ```
 
-## Spark Task
+## Transformation using PySpark
 
 Run the `SparkETLCode.ipynb` notebook in Jupyter to create the fact and dimensions and store them into separate folders in S3.
 
+## Data Model
+<img width="679" alt="image" src="https://github.com/SharadChoudhury/ATM-Refill-Batch-ETL/assets/65325622/45d27026-94e4-438e-a5bf-776efcb7123a">
 
-## Redshift Task
+
+## Data Warehousing with Redshift 
 
 - Create a Redshift cluster with two nodes of dc2.large instances. 
 - Create the schema and tables. Then load data into these tables from an S3 bucket. 
