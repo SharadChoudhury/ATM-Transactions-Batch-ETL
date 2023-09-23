@@ -1,5 +1,5 @@
 # ATM-Transactions-Batch-ETL
-Batch ETL pipeline using Apache Sqoop, Apache PySpark, Amazon S3 and Amazon RedShift to analyze ATM withdrawl behaviours to optimally manage the refill frequency.
+Performing Batch ETL of ATM transactions data using Apache Sqoop, Apache PySpark, loading the table data into Amazon S3 and warehousing using Amazon RedShift to analyze ATM withdrawl behaviours to optimally manage the refill frequency.
 
 
 # Project Outline
@@ -71,16 +71,17 @@ hadoop fs -ls /user/livy/data
 
 ## Transformation using PySpark
 
-Run the `SparkETLCode.ipynb` notebook in Jupyter to create the fact and dimensions and store them into separate folders in S3.
+- Run the `SparkETLCode.ipynb` notebook in Jupyter to create the fact and dimensions and store them into separate folders in S3. 
+- Here, we need to ensure that our EMR cluster has IAM role that enables it to access S3 objects.
+
 
 ## Data Model
 <img width="1252" alt="Screenshot 2023-09-23 at 12 23 29" src="https://github.com/SharadChoudhury/ATM-Refill-Batch-ETL/assets/65325622/8a8adce1-ade4-4bee-92d8-55375e698387">
 
 
 ## Data Warehousing with Redshift 
-
 - Create a Redshift cluster with two nodes of dc2.large instances. 
-- Create the schema and tables. Then load data into these tables from an S3 bucket. 
+- Create the schema and tables. Then load data into these tables from an S3 bucket. Ensure that the IAM role you associate with the Redshift cluster has appropriate permissions to read from S3. 
 - Follow the commands in `model_creation.sql` (S3 objects URI and region can be noted from their properties tab).
 - Now analyze the data using the queries from `analysis.sql`.
 Feel free to analyze more on the data to derive insights.
