@@ -8,7 +8,7 @@ select distinct(year) from atm_model.dim_date;
 -- 1 . Top 10 ATMs where most transactions are in the ’inactive’ state
 
 -- This query first fetches the top 10 rows with most inactive counts then joins them with atm, location tables
--- So it's cst is very low
+-- So it's cost is very low
 SELECT atm_number,
        atm_manufacturer,
        L.location,
