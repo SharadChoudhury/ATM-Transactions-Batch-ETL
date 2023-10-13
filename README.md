@@ -3,7 +3,8 @@ Performing Batch ETL of ATM transactions data using Apache Sqoop, Apache PySpark
 
 
 # Project Outline
-<img width="1146" alt="Screenshot 2023-09-23 at 11 50 15" src="https://github.com/SharadChoudhury/ATM-Refill-Batch-ETL/assets/65325622/0b4af350-0947-4006-bf97-fbe01e3f9bc6">
+<img width="1146" alt="arch" src="https://github.com/SharadChoudhury/ATM-Transactions-Batch-ETL/assets/65325622/bec37d5b-dd21-4f60-8d51-71c1efbc990e">
+
 
 
 ## RDS Connection Details
@@ -76,7 +77,8 @@ hadoop fs -ls /user/livy/data
 
 
 ## Data Model
-<img width="1252" alt="Screenshot 2023-09-23 at 12 23 29" src="https://github.com/SharadChoudhury/ATM-Refill-Batch-ETL/assets/65325622/8a8adce1-ade4-4bee-92d8-55375e698387">
+<img width="1252" alt="schema" src="https://github.com/SharadChoudhury/ATM-Transactions-Batch-ETL/assets/65325622/5199f9ef-6a97-40c2-ac58-9812d7ed292e">
+
 
 
 ## Data Warehousing with Redshift 
