@@ -4,7 +4,6 @@ select distinct(year) from atm_model.dim_date;
 -- records are only for year 2017
 
 
-
 -- 1 . Top 10 ATMs where most transactions are in the ’inactive’ state
 
 -- This query first fetches the top 10 rows with most inactive counts then joins them with atm, location tables
